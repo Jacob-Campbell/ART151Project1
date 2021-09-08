@@ -1,36 +1,66 @@
 
 function setup() {
-  createCanvas(windoowWidth, windowHeight);
-  ball = new Ball(150, 150);
-  ball2 = new Ball(300, 300);
+  createCanvas(windowWidth, windowHeight);
+  balls = [];
 
 }
-
 
 function draw() {
   background(0, 150, 150);
   
-  ball.update();
-  ball.show();
-  ball2.update();
-  ball2.show();
+  for(let i = 0; i < balls.length; i++) {
+    balls[i].update();
+    balls[i].show();
+  }
+
 }
 
 
-function Ball(x, y){
+function mousePressed() {
+  balls.push(new Ball(random(0, windowWidth), random(0, windowHeight))); // Alternatively can key off of mouseX and mouseY
+}
+
+
+function Ball(x, y) {
   this.pos = createVector(x, y);
   this.dir = createVector(random(-1, 1), random(-1, 1));
-  this.speed = random(0, 3);
+  this.speed = random(5, 10);
+  this.spinRate = 0;
+  this.tails = true;
 
-  this.update = function(){
+  this.update = function() {
     uPos = p5.Vector.mult(this.dir, this.speed);
     this.pos.add(uPos);
+
+    if(this.pos.x < 0 || this.pos.x > windowWidth){
+      this.dir.x *= -1;
+    }
+
+    if(this.pos.y < 0 || this.pos.y > windowHeight){
+      this.dir.y *= -1;
+    }
+    
   }
 
-  this.show = function(){
+  this.show = function() {
     stroke(0);
-    fill(100, 0, 0);
-    ellipse(this.pos.x, this.pos.y, 50, 50); // Down with perfect shapes
+    if(this.tails == true) {
+      this.spinRate = this.spinRate + 5;
+      print(this.spinRate);
+      if(this.spinRate > 45) {
+        this.tails = false;
+      }
+    } else {
+      this.spinRate = this.spinRate - 5;
+      if(this.spinRate < 5) {
+        this.tails = true;
+      }
+    }
+    
+    shapecolor = 255 * (this.spinRate/50);
+    fill(shapecolor, shapecolor, 0);
+    ellipse(this.pos.x, this.pos.y, this.spinRate, 50); // Down with perfect shapes
+
   }
 
 }
