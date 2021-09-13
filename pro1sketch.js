@@ -1,29 +1,33 @@
+var bigMoney;
+
+function preload() {
+  bigMoney = loadSound('cashmoney.mp3');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  bigMoney = loadSound('cashmoney.mp3')
-  coins = [];
+  balls = [];
 
 }
 
 function draw() {
   background(0, 150, 150);
   
-  for(let i = 0; i < coins.length; i++) {
-    coins[i].update();
-    coins[i].show();
+  for(let i = 0; i < balls.length; i++) {
+    balls[i].update();
+    balls[i].show();
   }
 
 }
 
 
 function mousePressed() {
-  coins.push(new Coin(random(0, windowWidth), random(0, windowHeight))); // Alternatively can key off of mouseX and mouseY
-  bigMoney.isPlaying();
+  balls.push(new Ball(random(0, windowWidth), random(0, windowHeight))); // Alternatively can key off of mouseX and mouseY
+  bigMoney.play();
 }
 
 
-function Coin(x, y) {
+function Ball(x, y) {
   this.pos = createVector(x, y);
   this.dir = createVector(random(-1, 1), random(-1, 1));
   this.speed = random(5, 10);
