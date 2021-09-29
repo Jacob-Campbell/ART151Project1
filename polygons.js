@@ -1,4 +1,6 @@
 
+var isGross = false;
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     alert("hello, how do you do, welcome. These are my bad triangles, the triangles are my focus. I hope there are mildly pleasing to look at.");
@@ -33,6 +35,8 @@ function babyGon( x, y ) {
     this.speed2 = random( 3, 8 );
     this.speed3 = random( 3, 8 );
     //this.speed4 = random( 3, 10 );
+
+    shapecolor3 = 0;
 
     this.update = function() {
         uPos1 = p5.Vector.mult( this.dir1, this.speed1 );
@@ -82,7 +86,7 @@ function babyGon( x, y ) {
         //stroke( 0 );
         shapecolor1 = 255 * ( this.pos1.x / windowWidth );
         shapecolor2 = 255 * ( this.pos3.y / windowWidth );
-        fill( shapecolor1, 0, shapecolor2 );
+        fill( shapecolor1, shapecolor3, shapecolor2 );
         //quad( this.pos1.x, this.pos1.y, this.pos2.x, this.pos2.y, this.pos3.x, this.pos3.y, this.pos4.x, this.pos4.y );
         triangle( this.pos1.x, this.pos1.y, this.pos2.x, this.pos2.y, this.pos3.x, this.pos3.y );
         triangle( -this.pos1.x, this.pos1.y, -this.pos2.x, this.pos2.y, -this.pos3.x, this.pos3.y );
@@ -91,4 +95,14 @@ function babyGon( x, y ) {
         //triangle( this.pos1.y, this.pos1.x, this.pos2.y, this.pos2.x, this.pos2.y, this.pos3.y );
         //triangle( -this.pos1.y, this.pos1.x, -this.pos2.y, this.pos2.x, -this.pos2.y, this.pos3.y );
     }
+
+    /*function keyPressed() {
+        if( keyCode == ENTER && isGross == false ) {
+            shapecolor3 = 255 * ( this.pos2.x / windowWidth );
+            isGross = true;
+        } else {
+            shapecolor3 = 0;
+            isGross = false;
+        }
+    }*/
 }
