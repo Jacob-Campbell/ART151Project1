@@ -3,7 +3,7 @@ var isGross = false;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    alert("hello, how do you do, welcome. These are my bad triangles, the triangles are my focus. I hope there are mildly pleasing to look at.");
+    alert("hello, how do you do, welcome. These are my bad triangles, the triangles and how they dance are my focus. I hope there are mildly pleasing to look at.");
     gons = [];
 }
 
